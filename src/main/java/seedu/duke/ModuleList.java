@@ -156,14 +156,58 @@ public class ModuleList {
         return deletedModule;
     }
 
-    public void listModules() {
+    public void listAllModules() {
         LOGGER.log(Level.INFO, "Starting listModules process");
         if (getModuleListSize() > 0) {
             Print.printModuleList(listOfModules);
         } else {
-            Print.printEmptyModuleList();
+            String year = "0";
+            Print.printEmptyModuleList(year);
         }
         LOGGER.log(Level.INFO, "Finished listModules process");
+    }
+
+    public void listModulesByYear(String year) {
+        ArrayList<Module> moduleListByYear = new ArrayList<>();
+        ArrayList<Module> moduleListSemOne = new ArrayList<>();
+        ArrayList<Module> moduleListSpecialTermOne = new ArrayList<>();
+        ArrayList<Module> moduleListSemTwo = new ArrayList<>();
+        ArrayList<Module> moduleListSpecialTermTwo = new ArrayList<>();
+
+        if (getModuleListSize() > 0) {
+            for (Module module : listOfModules) {
+                if (module.getYear().equals(year)) {
+                    switch (module.getSemester()) {
+                    case "1":
+                        moduleListSemOne.add(module);
+                        moduleListByYear.add(module);
+                        break;
+                    case "1.5":
+                        moduleListSpecialTermOne.add(module);
+                        moduleListByYear.add(module);
+                        break;
+                    case "2":
+                        moduleListSemTwo.add(module);
+                        moduleListByYear.add(module);
+                        break;
+                    case "2.5":
+                        moduleListSpecialTermTwo.add(module);
+                        moduleListByYear.add(module);
+                        break;
+                    default:
+                        moduleListByYear.add(module);
+                    }
+                }
+            }
+            if (moduleListByYear.size() != 0 ) {
+                Print.printModuleListByYear(moduleListSemOne, moduleListSpecialTermOne,
+                        moduleListSemTwo, moduleListSpecialTermTwo, year);
+            } else {
+                Print.printEmptyModuleList(year);
+            }
+        } else {
+            Print.printEmptyModuleList(year);
+        }
     }
 
     public void editModularCredits(String moduleCode, String newModularCredits) {

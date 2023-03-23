@@ -178,7 +178,7 @@ public class PrintTest {
         moduleList.addModule("CS2113T", "4", "CORE", "2", "2");
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
-        moduleList.listModules();
+        moduleList.listAllModules();
         String expectedOutput = "    ____________________________________________________________"
                 + System.lineSeparator() + "     Here are the modules in your list:" + System.lineSeparator()
                 + "     1.[C][\" \"] CS2113T 4 MCs (Year: 2, Sem: 2)" + System.lineSeparator()

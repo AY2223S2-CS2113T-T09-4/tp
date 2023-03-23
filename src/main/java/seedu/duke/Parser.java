@@ -157,7 +157,18 @@ public class Parser {
                 Print.printErrorMessage(e);
             }
             assert userCommands.length == 1;
-            moduleList.listModules();
+            moduleList.listAllModules();
+            break;
+        case "LIST":
+            try {
+                int numberOfFields = 2;
+                checkNumberOfFields(numberOfFields, userCommands);
+            } catch (DukeException e) {
+                Print.printErrorMessage(e);
+            }
+            assert userCommands.length == 2;
+            String year = userCommands[1].trim();
+            moduleList.listModulesByYear(year);
             break;
         case "EDIT":
             try {

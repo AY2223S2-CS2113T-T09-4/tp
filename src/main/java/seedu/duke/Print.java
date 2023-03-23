@@ -77,9 +77,58 @@ public class Print {
         System.out.println("    ____________________________________________________________");
     }
 
-    public static void printEmptyModuleList() {
+    public static void printModuleListByYear(ArrayList<Module> semOneModuleList,
+                                             ArrayList<Module> specialTermOneModuleList,
+                                             ArrayList<Module> semTwoModuleList,
+                                             ArrayList<Module> specialTermTwoModuleList ,String year) {
         System.out.println("    ____________________________________________________________");
-        System.out.println("     There are currently no modules in your list");
+        System.out.println("     Here are the modules in your list for Year " + year + " :");
+        System.out.println("    ____________________________________________________________");
+        System.out.println("    Semester 1:");
+        System.out.println("    ____________________________________________________________");
+        if (semOneModuleList.size() != 0) {
+            for (int i = 0; i < semOneModuleList.size(); i++) {
+                System.out.println("     " + (i + 1) + "." + semOneModuleList.get(i));
+            }
+        } else {
+            System.out.println("    Oops! Looks like there are no modules here.");
+        }
+        System.out.println("    ____________________________________________________________");
+        System.out.println("    Special Term 1:");
+        System.out.println("    ____________________________________________________________");
+        if (specialTermOneModuleList.size() != 0) {
+            for (int i = 0; i < specialTermOneModuleList.size(); i++) {
+                System.out.println("     " + (i + 1) + "." + specialTermOneModuleList.get(i));
+            }
+        } else {
+            System.out.println("    Oops! Looks like there are no modules here.");
+        }
+        System.out.println("    ____________________________________________________________");
+        System.out.println("    Semester 2:");
+        System.out.println("    ____________________________________________________________");
+        if (semTwoModuleList.size() != 0) {
+            for (int i = 0; i < semTwoModuleList.size(); i++) {
+                System.out.println("     " + (i + 1) + "." + semTwoModuleList.get(i));
+            }
+        } else {
+            System.out.println("    Oops! Looks like there are no modules here.");
+        }
+        System.out.println("    ____________________________________________________________");
+        System.out.println("    Special Term 2:");
+        System.out.println("    ____________________________________________________________");
+        if (specialTermTwoModuleList.size() != 0) {
+            for (int i = 0; i < specialTermTwoModuleList.size(); i++) {
+                System.out.println("     " + (i + 1) + "." + specialTermTwoModuleList.get(i));
+            }
+        } else {
+            System.out.println("    Oops! Looks like there are no modules here.");
+        }
+        System.out.println("    ____________________________________________________________");
+    }
+
+    public static void printEmptyModuleList(String year) {
+        System.out.println("    ____________________________________________________________");
+        System.out.println("     There are currently no modules in your list for Year " + year);
         System.out.println("    ____________________________________________________________");
     }
 
