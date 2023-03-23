@@ -77,53 +77,49 @@ public class Print {
         System.out.println("    ____________________________________________________________");
     }
 
-    public static void printModuleListByYear(ArrayList<Module> semOneModuleList,
-                                             ArrayList<Module> specialTermOneModuleList,
-                                             ArrayList<Module> semTwoModuleList,
-                                             ArrayList<Module> specialTermTwoModuleList ,String year) {
+    public static void printModuleListByYear(ArrayList<String> semOneModuleList,
+                                             ArrayList<String> specialTermOneModuleList,
+                                             ArrayList<String> semTwoModuleList,
+                                             ArrayList<String> specialTermTwoModuleList ,String year) {
         System.out.println("    ____________________________________________________________");
         System.out.println("     Here are the modules in your list for Year " + year + " :");
         System.out.println("    ____________________________________________________________");
-        System.out.println("    Semester 1:");
-        System.out.println("    ____________________________________________________________");
-        if (semOneModuleList.size() != 0) {
-            for (int i = 0; i < semOneModuleList.size(); i++) {
-                System.out.println("     " + (i + 1) + "." + semOneModuleList.get(i));
+        System.out.printf("       %-30s %-10s %-30s %-10s %-30s %-10s %-30s\n", "Semester One", "|",
+                "Special Term One", "|", "Semester Two", "|", "Special Term Two");
+
+
+        int max = Math.max(Math.max(semOneModuleList.size(), specialTermOneModuleList.size()),
+                Math.max(semTwoModuleList.size(), specialTermTwoModuleList.size()));
+
+        for (int i = 0; i < max; i++) {
+            String semOne, specialTermOne, semTwo, specialTermTwo;
+            if (i < semOneModuleList.size()) {
+                semOne = semOneModuleList.get(i);
+            } else {
+                semOne = " ";
             }
-        } else {
-            System.out.println("    Oops! Looks like there are no modules here.");
-        }
-        System.out.println("    ____________________________________________________________");
-        System.out.println("    Special Term 1:");
-        System.out.println("    ____________________________________________________________");
-        if (specialTermOneModuleList.size() != 0) {
-            for (int i = 0; i < specialTermOneModuleList.size(); i++) {
-                System.out.println("     " + (i + 1) + "." + specialTermOneModuleList.get(i));
+
+            if (i < specialTermOneModuleList.size()) {
+                specialTermOne = specialTermOneModuleList.get(i);
+            } else {
+                specialTermOne = " ";
             }
-        } else {
-            System.out.println("    Oops! Looks like there are no modules here.");
-        }
-        System.out.println("    ____________________________________________________________");
-        System.out.println("    Semester 2:");
-        System.out.println("    ____________________________________________________________");
-        if (semTwoModuleList.size() != 0) {
-            for (int i = 0; i < semTwoModuleList.size(); i++) {
-                System.out.println("     " + (i + 1) + "." + semTwoModuleList.get(i));
+
+            if (i < semTwoModuleList.size()) {
+                semTwo = semTwoModuleList.get(i);
+            } else {
+                semTwo = " ";
             }
-        } else {
-            System.out.println("    Oops! Looks like there are no modules here.");
-        }
-        System.out.println("    ____________________________________________________________");
-        System.out.println("    Special Term 2:");
-        System.out.println("    ____________________________________________________________");
-        if (specialTermTwoModuleList.size() != 0) {
-            for (int i = 0; i < specialTermTwoModuleList.size(); i++) {
-                System.out.println("     " + (i + 1) + "." + specialTermTwoModuleList.get(i));
+
+            if (i < specialTermTwoModuleList.size()) {
+                specialTermTwo = specialTermTwoModuleList.get(i);
+            } else {
+                specialTermTwo = " ";
             }
-        } else {
-            System.out.println("    Oops! Looks like there are no modules here.");
+
+            System.out.printf("       %-30s %-10s %-30s %-10s %-30s %-10s %-30s\n", semOne, "|", specialTermOne, "|",
+                    semTwo, "|", specialTermTwo);
         }
-        System.out.println("    ____________________________________________________________");
     }
 
     public static void printEmptyModuleList(String year) {
@@ -182,17 +178,17 @@ public class Print {
         System.out.println("    ____________________________________________________________");
     }
 
-    public static void printModuleTypeRequirements(ArrayList<Module> completedModules, int completed_MCs,
-                                                        int remaining_MCs, int required_MCs, String moduleType) {
+    public static void printModuleTypeRequirements(ArrayList<Module> completedModules, int completedMC,
+                                                        int remainingMC, int requiredMC, String moduleType) {
         System.out.println("    ____________________________________________________________");
         System.out.println("     Here are the " + moduleType + " modules that you have completed so far:");
         System.out.println("    ____________________________________________________________");
         for (int i = 0; i < completedModules.size(); i++) {
             System.out.println("     " + (i + 1) + ". " + completedModules.get(i));
         }
-        System.out.println("     Congratulations! You have completed " + completed_MCs + " of the "
-                + required_MCs + " MCs required :)");
-        System.out.println("     You need to complete " + remaining_MCs + " MCs more.");
+        System.out.println("     Congratulations! You have completed " + completedMC + " of the "
+                + requiredMC + " MCs required :)");
+        System.out.println("     You need to complete " + remainingMC + " MCs more.");
         System.out.println("    ____________________________________________________________");
     }
 

@@ -156,6 +156,7 @@ public class ModuleList {
         return deletedModule;
     }
 
+    /*
     public void listAllModules() {
         LOGGER.log(Level.INFO, "Starting listModules process");
         if (getModuleListSize() > 0) {
@@ -167,31 +168,35 @@ public class ModuleList {
         LOGGER.log(Level.INFO, "Finished listModules process");
     }
 
+     */
     public void listModulesByYear(String year) {
+        LOGGER.log(Level.INFO, "Starting listModules process");
         ArrayList<Module> moduleListByYear = new ArrayList<>();
-        ArrayList<Module> moduleListSemOne = new ArrayList<>();
-        ArrayList<Module> moduleListSpecialTermOne = new ArrayList<>();
-        ArrayList<Module> moduleListSemTwo = new ArrayList<>();
-        ArrayList<Module> moduleListSpecialTermTwo = new ArrayList<>();
+        ArrayList<String> moduleListSemOne = new ArrayList<>();
+        ArrayList<String> moduleListSpecialTermOne = new ArrayList<>();
+        ArrayList<String> moduleListSemTwo = new ArrayList<>();
+        ArrayList<String> moduleListSpecialTermTwo = new ArrayList<>();
 
         if (getModuleListSize() > 0) {
             for (Module module : listOfModules) {
+                String mod = "[\"" + module.getModuleType() + "\"] " + "[\"" + module.getGrade() + "\"] "
+                        + module.getModuleCode() + " " + module.getModularCredits() + " MCs";
                 if (module.getYear().equals(year)) {
                     switch (module.getSemester()) {
                     case "1":
-                        moduleListSemOne.add(module);
+                        moduleListSemOne.add(mod);
                         moduleListByYear.add(module);
                         break;
                     case "1.5":
-                        moduleListSpecialTermOne.add(module);
+                        moduleListSpecialTermOne.add(mod);
                         moduleListByYear.add(module);
                         break;
                     case "2":
-                        moduleListSemTwo.add(module);
+                        moduleListSemTwo.add(mod);
                         moduleListByYear.add(module);
                         break;
                     case "2.5":
-                        moduleListSpecialTermTwo.add(module);
+                        moduleListSpecialTermTwo.add(mod);
                         moduleListByYear.add(module);
                         break;
                     default:
@@ -208,6 +213,7 @@ public class ModuleList {
         } else {
             Print.printEmptyModuleList(year);
         }
+        LOGGER.log(Level.INFO, "Finished listModules process");
     }
 
     public void editModularCredits(String moduleCode, String newModularCredits) {
@@ -443,17 +449,17 @@ public class ModuleList {
     }
 
     public void trackCoreModules(ArrayList<Module> listOfCoreModules, String moduleType) {
-        int completed_MCs = 0;
-        int required_MCs = 96;
-        int remaining_MCs = 0;
+        int completedMC = 0;
+        int requiredMC = 96;
+        int remainingMC = 0;
         for (Module module : listOfCoreModules) {
             if (!(module.getGrade().equals(" "))) {
-                completed_MCs += Integer.parseInt(module.getModularCredits());
+                completedMC += Integer.parseInt(module.getModularCredits());
             } else {
                 listOfCoreModules.remove(module);
             }
         }
-        remaining_MCs = required_MCs - completed_MCs;
-        Print.printModuleTypeRequirements(listOfCoreModules, completed_MCs, remaining_MCs, required_MCs, moduleType);
+        remainingMC = requiredMC - completedMC;
+        Print.printModuleTypeRequirements(listOfCoreModules, completedMC, remainingMC, requiredMC, moduleType);
     }
 }

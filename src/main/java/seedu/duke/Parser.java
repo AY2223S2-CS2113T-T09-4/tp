@@ -157,7 +157,10 @@ public class Parser {
                 Print.printErrorMessage(e);
             }
             assert userCommands.length == 1;
-            moduleList.listAllModules();
+            moduleList.listModulesByYear("1");
+            moduleList.listModulesByYear("2");
+            moduleList.listModulesByYear("3");
+            moduleList.listModulesByYear("4");
             break;
         case "LIST":
             try {
