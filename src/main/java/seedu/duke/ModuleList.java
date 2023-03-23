@@ -121,7 +121,7 @@ public class ModuleList {
                 }
             }
             break;
-        case "Internship":
+        case "INTERNSHIP":
             for (Module module : listOfModules) {
                 if (module instanceof Internship) {
                     foundModules.add(module);
@@ -129,7 +129,7 @@ public class ModuleList {
             }
             break;
         default:
-            throw new DukeException("Make sure your types are CORE,GE,UE or Internship");
+            throw new DukeException("Make sure your types are CORE, GE, UE or Internship");
         }
         return foundModules;
     }
@@ -299,6 +299,13 @@ public class ModuleList {
 
     }
 
+    /**
+     * Updates the grade attribute for the module code specified by the user.
+     *
+     * @param moduleCode the string containing the name of the module code.
+     * @param moduleGrade the string containing the grade input by user.
+     * @return the module object with the updated grade attribute.
+     */
     public Module updateModuleGrade(String moduleCode, String moduleGrade) {
         for (Module module : listOfModules) {
             if (module.getModuleCode().equals(moduleCode)) {
@@ -309,6 +316,9 @@ public class ModuleList {
         return null;
     }
 
+    /**
+     * Calculates the CAP for the user based on existing modules in the list.
+     */
     public void calculateCAP() {
         double calculatedCAP;
         double sumOfWeightage = 0;
@@ -325,6 +335,12 @@ public class ModuleList {
         Print.printCalculatedCAP(roundedOffCAP);
     }
 
+    /**
+     * Checks if a module's grade should be counted in the CAP for the user.
+     *
+     * @param moduleGrade the string containing the grade input by user.
+     * @return a boolean that is set to true if the module grade should be counted, else set to false.
+     */
     public boolean shouldCountModuleGrade(String moduleGrade) {
         boolean shouldCount;
         switch(moduleGrade) {
@@ -358,6 +374,12 @@ public class ModuleList {
         return shouldCount;
     }
 
+    /**
+     * Gets the grade value corresponding to the module grade string given by the user.
+     *
+     * @param moduleGrade the string containing the grade input by user.
+     * @return the double value corresponding to the module grade given.
+     */
     public double getGradeValue(String moduleGrade) {
         double gradeValue;
         switch(moduleGrade) {
@@ -400,22 +422,34 @@ public class ModuleList {
         return gradeValue;
     }
 
+    /**
+     * Track the number of GE Modules completed
+     *
+     * @param listOfGeneralElectives list of Core Modules that are in the list
+     * @param moduleType String variable that holds the moduleType, "GE"
+     */
     public void trackGeneralElectives(ArrayList<Module> listOfGeneralElectives, String moduleType) {
-        int completed_MCs = 0;
-        int required_MCs = 20;
-        int remaining_MCs = 0;
-        for (Module module : listOfModules) {
+        int completedMCs = 0;
+        int requiredMCs = 20;
+        int remainingMCs = 0;
+        for (Module module : listOfGeneralElectives) {
             if (!(module.getGrade().equals(" "))) {
-                completed_MCs += Integer.parseInt(module.getModularCredits());
+                completedMCs += Integer.parseInt(module.getModularCredits());
             } else {
                 listOfGeneralElectives.remove(module);
             }
         }
-        remaining_MCs = required_MCs - completed_MCs;
+        remainingMCs = requiredMCs - completedMCs;
         Print.printModuleTypeRequirements(listOfGeneralElectives,
-                completed_MCs, remaining_MCs, required_MCs, moduleType);
+                completedMCs, remainingMCs, requiredMCs, moduleType);
     }
 
+    /**
+     * Track the number of UE Modules completed
+     *
+     * @param listOfUnRestrictedElectives list of UE Modules that are in the list
+     * @param moduleType String variable that holds the moduleType, "UE"
+     */
     public void trackUnrestrictedElectives(ArrayList<Module> listOfUnRestrictedElectives, String moduleType) {
         int completed_MCs = 0;
         int required_MCs = 32;
@@ -432,6 +466,12 @@ public class ModuleList {
                 completed_MCs, remaining_MCs, required_MCs, moduleType);
     }
 
+    /**
+     * Track the number of Internship Modules completed
+     *
+     * @param listOfInternship list of Internship Modules that are in the list
+     * @param moduleType String variable that holds the moduleType, "Internship"
+     */
     public void trackInternship(ArrayList<Module> listOfInternship, String moduleType) {
         int completed_MCs = 0;
         int required_MCs = 12;
@@ -448,6 +488,12 @@ public class ModuleList {
                 completed_MCs, remaining_MCs, required_MCs, moduleType);
     }
 
+    /**
+     * Track the number of Core Modules completed
+     *
+     * @param listOfCoreModules list of Core Modules that are in the list
+     * @param moduleType String variable that holds the moduleType, "CORE"
+     */
     public void trackCoreModules(ArrayList<Module> listOfCoreModules, String moduleType) {
         int completedMC = 0;
         int requiredMC = 96;
